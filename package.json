@@ -8,10 +8,12 @@
   "scripts": {
     "compile:css": "node-sass static/sass/main.sass static/css/main.min.css --output-style compressed",
     "compile:js": "uglifyjs static/scripts/main.js -o static/scripts/main.min.js",
-    "compile": "npm run compile:css && npm run compile:js"
+    "compile:docs": "gitbook build ./gitbook ./docs",
+    "compile": "npm run compile:docs && npm run compile:css && npm run compile:js"
   },
   "license": "MIT",
   "devDependencies": {
+    "gitbook-cli": "^2.3.0",
     "node-sass": "^4.1.1",
     "uglify-js": "^2.7.5"
   }
