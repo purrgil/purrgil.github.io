@@ -1,3 +1,105 @@
 body
     margin: 0px
     padding: 0px
+    background: #fbf6f8
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px
+
+main
+    padding: 130px 0
+
+    .main-info, img
+        display: inline-block
+        vertical-align: top
+
+    .main-info
+        box-sizing: border-box
+        width: 50%
+        padding: 55px
+
+        a
+            padding: 5px 10px
+            color: #8477b2
+            text-decoration: none
+            border: 1px solid #8477b2
+            border-radius: 5px
+            font-size: 14px
+
+            :hover
+                color: #2f1434
+
+    img
+        width: 40%
+
+#header
+    background: #2f1434
+    padding: 5px
+
+    .named
+        height: 30px
+
+    nav
+        float: right
+
+        ul
+            list-style: none
+            padding: 0
+            margin: 8px 0
+
+            li
+                display: inline-block
+                margin-left: 10px
+
+                a
+                    color: #fff
+                    text-decoration: none
+
+
+#why
+    background: #8477b2
+    padding: 70px 0px
+
+    article
+        display: inline-block
+        width: 28%
+        margin: 0 2%
+        color: #fbf6f8
+        vertical-align: top
+        text-align: center
+
+        h2
+            color: #2f1434
+
+#about
+    background: #2f1434
+    color: #fbf6f8
+    padding: 70px 0
+
+    .terminal, article
+        display: inline-block
+        vertical-align: top
+        margin: 0 2%
+
+    .terminal
+        width: 35%
+
+    article
+        width: 55%
+
+        h1
+            font-size: 40px
+            color: #fff
+
+.container
+    width: 100%
+    margin: 0 auto
+    display: block
+
+    @media screen and (min-width: 768px)
+        width: 700px
+
+    @media screen and (min-width: 992px)
+        width: 970px
+
+    @media screen and (min-width: 1024px)
+        width: 1000px
