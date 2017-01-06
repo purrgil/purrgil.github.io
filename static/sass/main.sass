@@ -6,16 +6,16 @@ body
     font-size: 18px
 
 main
-    padding: 130px 0
+    padding: 80px 0 200px
 
-    .main-info, img
+    .main-info, .logo
         display: inline-block
         vertical-align: top
 
     .main-info
         box-sizing: border-box
         width: 50%
-        padding: 55px
+        padding: 0px 55px 55px
 
         a
             padding: 5px 10px
@@ -26,13 +26,20 @@ main
             font-size: 14px
 
             :hover
-                color: #2f1434
+                color: #513456
 
-    img
+    .logo
         width: 40%
+        position: relative
+
+        img
+            position: absolute
+            left: -75%
+            width: 1095px
+            top: -63px
 
 #header
-    background: #2f1434
+    background: #513456
     padding: 5px
 
     .named
@@ -57,7 +64,7 @@ main
 
 #why
     background: #8477b2
-    padding: 70px 0px
+    padding: 150px 0px
 
     article
         display: inline-block
@@ -68,12 +75,12 @@ main
         text-align: center
 
         h2
-            color: #2f1434
+            color: #513456
 
 #about
-    background: #2f1434
+    background: #513456
     color: #fbf6f8
-    padding: 70px 0
+    padding: 150px 0
 
     .terminal, article
         display: inline-block
