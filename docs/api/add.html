@@ -129,7 +129,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.3" data-path="../introduction/quickstart.html">
+        <li class="chapter " data-level="1.1.3" data-path="../introduction/package.html">
+            
+                <a href="../introduction/package.html">
+            
+                    
+                    Packages
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4" data-path="../introduction/quickstart.html">
             
                 <a href="../introduction/quickstart.html">
             
@@ -142,7 +155,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.4" data-path="../introduction/slowstart.html">
+        <li class="chapter " data-level="1.1.5" data-path="../introduction/slowstart.html">
             
                 <a href="../introduction/slowstart.html">
             
@@ -316,26 +329,34 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="add">Add</h1>
-<p><code>add</code> will do exactly what you expect: add a package, if you not know what is a purrgil package <a href="../introduction/package.md">click here</a>. This can be a github&apos;s repo or a dockerhub&apos;s image. Example: <code>purrgil/purrgil</code> (github) or <code>node:6</code> (dockerhub).
+<p><code>add</code> will do exactly what you expect: add a package, if you not know what is a purrgil package <a href="../introduction/package.html">click here</a>. This can be a github&apos;s repo or a dockerhub&apos;s image. Example: <code>purrgil/purrgil</code> (github) or <code>node:6</code> (dockerhub).
 By the default purrgil will expect a github&apos;s repo, if you want to use a dockerhub&apos;s image or other thing you&apos;ve to specify using flag <code>--provider</code>.</p>
 <pre><code>purrgil add &lt;package&gt; [flag]
 </code></pre><h3 id="flags">Flags</h3>
-<p>...todo</p>
+<p><strong>not-a-service</strong>: Sometimes you need to add something that isn&apos;t a service (not have a dockerfile), can be unique a repo with mock data or a internal lib create to abstract and reuse a code, a open source project that you use but always change de code and need more flexibility to develop inside docker environments. When you use that we list the dependencie but in <code>--compose-helper</code> we try to link that as a volume in another files :)</p>
+<p><strong>provider</strong>: By default add will get things from <code>github</code>, but you can change that passing this flag! Actually we are able to get from <code>bitbucket</code> (mercurial supported) and <code>dockerhub</code>. Enums: <code>bitbucket</code>,<code>bitbucket_mcr</code> and <code>dockerhub</code></p>
+<p><strong>https</strong>: By default clones will try to persist on a <code>SSH</code> url, if you want the <code>https</code> protocol you can use that flag.</p>
+<p><strong>name</strong>: Always the name will be the repo name or image name. Example: <code>purrgil/something-example</code> -&gt; <code>something-example</code>, if you want change that you can use this flag and pass a custom name</p>
+<p><strong>compose-helper</strong>: This functionallity will help you to insert some basic data into your <code>docker-compose</code> file, by default purrgil only persist thins into <code>purrgil.yml</code> and <code>.gitingnore</code> this flag change that.</p>
 <h2 id="how-it-works">How it works</h2>
 <p>First of all you need understanding the reason of packages, the link was passed before in add intro, once make that you can access the add code <a href="https://github.com/purrgil/purrgil/blob/master/commands/add.go" target="_blank">here</a>. Add start on <a href="https://github.com/purrgil/purrgil/blob/master/main.go" target="_blank">main.go</a>, we can find the <code>vars</code> with configuration and the call to <code>command.Add</code> into it:</p>
-<pre><code class="lang-golang">    add     = app.Command(<span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;Add a dependency to project&quot;</span>)
-    addS    = add.Arg(<span class="hljs-string">&quot;pkg&quot;</span>, <span class="hljs-string">&quot;Add a service&quot;</span>).String()
-    addNs   = add.Flag(<span class="hljs-string">&quot;not-a-service&quot;</span>, <span class="hljs-string">&quot;Add only a git repository&quot;</span>).Bool()
-    addDk   = add.Flag(<span class="hljs-string">&quot;dockerhub&quot;</span>, <span class="hljs-string">&quot;Install image directly from dockerhub&quot;</span>).Bool()
-    addName = add.Flag(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;Give a custom name to package&quot;</span>).String()
-    addDcConfig  = add.Flag(<span class="hljs-string">&quot;compose-helper&quot;</span>, <span class="hljs-string">&quot;Active an interface to inject basic compose infos&quot;</span>).Bool()
+<pre><code class="lang-golang">    avaibleProviders = []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;github&quot;</span>, <span class="hljs-string">&quot;bitbucket&quot;</span>, <span class="hljs-string">&quot;dockerhub&quot;</span>, <span class="hljs-string">&quot;bitbucket_mcr&quot;</span>}
+
+    add     = app.Command(<span class="hljs-string">&quot;add&quot;</span>, <span class="hljs-string">&quot;Add a dependency to project&quot;</span>)
+    addPkgIdentity = add.Arg(<span class="hljs-string">&quot;pkg&quot;</span>, <span class="hljs-string">&quot;Add a service&quot;</span>).String()
+    addServiceFlag  = add.Flag(<span class="hljs-string">&quot;not-a-service&quot;</span>, <span class="hljs-string">&quot;Add only a git repository&quot;</span>).Bool()
+    addProvider   = add.Flag(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;Install image directly from dockerhub&quot;</span>).Enum(avaibleProviders...)
+    addName = add.Flag(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;Give a custom name to package&quot;</span>).String()            addName = add.Flag(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;Give a custom name to package&quot;</span>).String()
+    addHTTPS = add.Flag(<span class="hljs-string">&quot;https&quot;</span>, <span class="hljs-string">&quot;download package in https mode&quot;</span>).Bool()
+    addComposeConfig  = add.Flag(<span class="hljs-string">&quot;compose-helper&quot;</span>, <span class="hljs-string">&quot;Active an interface to inject basic compose infos&quot;</span>).Bool()
 </code></pre>
 <pre><code class="lang-golang">    <span class="hljs-keyword">case</span> add.FullCommand():
-        commands.Add(*addS, configs.AddConfig{
-            IsService:  *addNs,
-            Dockerhub:  *addDk,
+        commands.Add(*addPkgIdentity, configs.AddConfig{
+            IsService:  *addServiceFlag,
+            Provider:  *addProvider,
             CustomName: *addName,
-            ComposeConfig: *addDcConfig,
+            ComposeConfig: *addComposeConfig,
+            HttpsMode: *addHTTPS,
         })
 </code></pre>
 <p>After that we call our <code>docker-compose.yml</code>, <code>purrgil.yml</code> and <code>.gitignore</code> file objects to persist the changes, we use <code>NewPurrgilPackage</code> to instance a package and after that we user <code>PackageInstall(PurrgilPackage)</code> to access a single method of <code>install</code> command and download the source.</p>
@@ -410,7 +431,7 @@ By the default purrgil will expect a github&apos;s repo, if you want to use a do
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Add","level":"1.2.3","depth":2,"next":{"title":"Remove","level":"1.2.4","depth":2,"path":"api/rm.md","ref":"api/rm.md","articles":[]},"previous":{"title":"Install","level":"1.2.2","depth":2,"path":"api/install.md","ref":"api/install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/add.md","mtime":"2017-01-09T11:27:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-09T11:28:34.565Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Add","level":"1.2.3","depth":2,"next":{"title":"Remove","level":"1.2.4","depth":2,"path":"api/rm.md","ref":"api/rm.md","articles":[]},"previous":{"title":"Install","level":"1.2.2","depth":2,"path":"api/install.md","ref":"api/install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/add.md","mtime":"2017-01-09T11:43:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-09T11:44:26.377Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

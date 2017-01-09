@@ -6,26 +6,39 @@ By the default purrgil will expect a github's repo, if you want to use a dockerh
 purrgil add <package> [flag]
 ```
 ### Flags
-...todo
+
+**not-a-service**: Sometimes you need to add something that isn't a service (not have a dockerfile), can be unique a repo with mock data or a internal lib create to abstract and reuse a code, a open source project that you use but always change de code and need more flexibility to develop inside docker environments. When you use that we list the dependencie but in `--compose-helper` we try to link that as a volume in another files :)
+
+**provider**: By default add will get things from `github`, but you can change that passing this flag! Actually we are able to get from `bitbucket` (mercurial supported) and `dockerhub`. Enums: `bitbucket`,`bitbucket_mcr` and `dockerhub`
+
+**https**: By default clones will try to persist on a `SSH` url, if you want the `https` protocol you can use that flag.
+
+**name**: Always the name will be the repo name or image name. Example: `purrgil/something-example` -> `something-example`, if you want change that you can use this flag and pass a custom name
+
+**compose-helper**: This functionallity will help you to insert some basic data into your `docker-compose` file, by default purrgil only persist thins into `purrgil.yml` and `.gitingnore` this flag change that.
 
 ## How it works
 First of all you need understanding the reason of packages, the link was passed before in add intro, once make that you can access the add code [here](https://github.com/purrgil/purrgil/blob/master/commands/add.go). Add start on [main.go](https://github.com/purrgil/purrgil/blob/master/main.go), we can find the `vars` with configuration and the call to `command.Add` into it:
 
 ```golang
+    avaibleProviders = []string{"github", "bitbucket", "dockerhub", "bitbucket_mcr"}
+
     add     = app.Command("add", "Add a dependency to project")
-    addS    = add.Arg("pkg", "Add a service").String()
-    addNs   = add.Flag("not-a-service", "Add only a git repository").Bool()
-    addDk   = add.Flag("dockerhub", "Install image directly from dockerhub").Bool()
-    addName = add.Flag("name", "Give a custom name to package").String()
-    addDcConfig  = add.Flag("compose-helper", "Active an interface to inject basic compose infos").Bool()
+    addPkgIdentity = add.Arg("pkg", "Add a service").String()
+    addServiceFlag  = add.Flag("not-a-service", "Add only a git repository").Bool()
+    addProvider   = add.Flag("provider", "Install image directly from dockerhub").Enum(avaibleProviders...)
+    addName = add.Flag("name", "Give a custom name to package").String()            addName = add.Flag("name", "Give a custom name to package").String()
+    addHTTPS = add.Flag("https", "download package in https mode").Bool()
+    addComposeConfig  = add.Flag("compose-helper", "Active an interface to inject basic compose infos").Bool()
 ```
 ```golang
     case add.FullCommand():
-        commands.Add(*addS, configs.AddConfig{
-            IsService:  *addNs,
-            Dockerhub:  *addDk,
+        commands.Add(*addPkgIdentity, configs.AddConfig{
+            IsService:  *addServiceFlag,
+            Provider:  *addProvider,
             CustomName: *addName,
-            ComposeConfig: *addDcConfig,
+            ComposeConfig: *addComposeConfig,
+            HttpsMode: *addHTTPS,
         })
 ```
 

@@ -3,6 +3,7 @@
 * [Introduction](README.md)
     * [Motivation](introduction/motivation.md)
     * [Installing](introduction/installing.md)
+    * [Packages](introduction/package.md)
     * [Quick Start](introduction/quickstart.md)
     * [Slow Start](introduction/slowstart.md)
 * API

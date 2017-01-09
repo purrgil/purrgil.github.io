@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Up/Down · GitBook</title>
+        <title>Packages · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="deploy.html" />
+    <link rel="next" href="quickstart.html" />
     
     
-    <link rel="prev" href="packages.html" />
+    <link rel="prev" href="installing.html" />
     
 
     </head>
@@ -103,9 +103,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.1.1" data-path="../introduction/motivation.html">
+        <li class="chapter " data-level="1.1.1" data-path="motivation.html">
             
-                <a href="../introduction/motivation.html">
+                <a href="motivation.html">
             
                     
                     Motivation
@@ -116,9 +116,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2" data-path="../introduction/installing.html">
+        <li class="chapter " data-level="1.1.2" data-path="installing.html">
             
-                <a href="../introduction/installing.html">
+                <a href="installing.html">
             
                     
                     Installing
@@ -129,9 +129,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.3" data-path="../introduction/package.html">
+        <li class="chapter active" data-level="1.1.3" data-path="package.html">
             
-                <a href="../introduction/package.html">
+                <a href="package.html">
             
                     
                     Packages
@@ -142,9 +142,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.4" data-path="../introduction/quickstart.html">
+        <li class="chapter " data-level="1.1.4" data-path="quickstart.html">
             
-                <a href="../introduction/quickstart.html">
+                <a href="quickstart.html">
             
                     
                     Quick Start
@@ -155,9 +155,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.5" data-path="../introduction/slowstart.html">
+        <li class="chapter " data-level="1.1.5" data-path="slowstart.html">
             
-                <a href="../introduction/slowstart.html">
+                <a href="slowstart.html">
             
                     
                     Slow Start
@@ -187,9 +187,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="init.html">
+        <li class="chapter " data-level="1.2.1" data-path="../api/init.html">
             
-                <a href="init.html">
+                <a href="../api/init.html">
             
                     
                     Init
@@ -200,9 +200,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="install.html">
+        <li class="chapter " data-level="1.2.2" data-path="../api/install.html">
             
-                <a href="install.html">
+                <a href="../api/install.html">
             
                     
                     Install
@@ -213,9 +213,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="add.html">
+        <li class="chapter " data-level="1.2.3" data-path="../api/add.html">
             
-                <a href="add.html">
+                <a href="../api/add.html">
             
                     
                     Add
@@ -226,9 +226,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="rm.html">
+        <li class="chapter " data-level="1.2.4" data-path="../api/rm.html">
             
-                <a href="rm.html">
+                <a href="../api/rm.html">
             
                     
                     Remove
@@ -239,9 +239,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="packages.html">
+        <li class="chapter " data-level="1.2.5" data-path="../api/packages.html">
             
-                <a href="packages.html">
+                <a href="../api/packages.html">
             
                     
                     Packages
@@ -252,9 +252,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.6" data-path="updown.html">
+        <li class="chapter " data-level="1.2.6" data-path="../api/updown.html">
             
-                <a href="updown.html">
+                <a href="../api/updown.html">
             
                     
                     Up/Down
@@ -265,9 +265,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="deploy.html">
+        <li class="chapter " data-level="1.2.7" data-path="../api/deploy.html">
             
-                <a href="deploy.html">
+                <a href="../api/deploy.html">
             
                     
                     Deploy
@@ -313,7 +313,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Up/Down</a>
+        <a href=".." >Packages</a>
     </h1>
 </div>
 
@@ -328,7 +328,36 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="up--down">Up &amp; Down</h1>
+                                <h1 id="purrgil-package">Purrgil Package</h1>
+<p>A package is <strong>ANYTHING</strong> that you can pull from somewhere! The model from a package it&apos;s simple: You have a <strong>name</strong> a alias from the folder name (that represents your namespace), the <strong>identity</strong> how the property name says, this is a ID from your package, a unique string that usually be a github <code>&lt;name&gt;/&lt;repo&gt;</code> or a dockerhub image name. To finish we have package download properties as <code>provider</code> to identify the download source (github, bitbucket or dockerhub), a ssh flag and if the package will turn a service into dockercompose :)</p>
+<h3 id="where-i-use-that">Where I use that?</h3>
+<p>Packages are saved into your <code>purrgil.yml</code> with the purpose of remember the sources from mount your development environment and in the future use the data for construct images and deploy them.</p>
+<h1 id="how-it-works">How it works</h1>
+<p>A package is a go struct find <a href="https://github.com/purrgil/purrgil/blob/master/file/purrgilpkg.go" target="_blank">here</a></p>
+<pre><code class="lang-golang">    <span class="hljs-keyword">type</span> PurrgilPackage <span class="hljs-keyword">struct</span> {
+        Name     <span class="hljs-keyword">string</span> <span class="hljs-string">`yaml:&quot;name&quot;`</span>
+        Identity   <span class="hljs-keyword">string</span> <span class="hljs-string">`yaml:&quot;identity&quot;`</span>
+        Provider <span class="hljs-keyword">string</span> <span class="hljs-string">`yaml:&quot;provider&quot;`</span>
+        Service  <span class="hljs-keyword">bool</span>   <span class="hljs-string">`yaml:&quot;service&quot;`</span>
+    }
+</code></pre>
+<p>We use that mainly into PurrgilConfig struct <a href="https://github.com/purrgil/purrgil/blob/master/file/purrgil.go" target="_blank">here</a></p>
+<pre><code class="lang-golang"><span class="hljs-keyword">type</span> Purrgil <span class="hljs-keyword">struct</span> {
+    yaml         Yaml
+    Name       <span class="hljs-keyword">string</span>           <span class="hljs-string">`yaml:&quot;name&quot;`</span>
+    Packages []PurrgilPackage <span class="hljs-string">`yaml:&quot;packages,omitempty&quot;`</span>
+    Settings    PurrgilSettings  <span class="hljs-string">`yaml:&quot;settings,omitempty&quot;`</span>
+}
+</code></pre>
+<p>In the rest of code we use <code>PurrgilPackage</code> unique as a type, to invoke that in most of cases we use method <code>NewPurrgilPackage(string, AddConfig{})</code> to create a instance. The <code>AddConfig</code> can be found <a href="https://github.com/purrgil/purrgil/blob/master/configs/commands.go" target="_blank">here</a> and brings inside the command <code>purrgil add</code> settings:</p>
+<pre><code class="lang-golang"><span class="hljs-keyword">type</span> AddConfig <span class="hljs-keyword">struct</span> {
+    IsService             <span class="hljs-keyword">bool</span>
+    Provider              <span class="hljs-keyword">string</span>
+    HttpsMode          <span class="hljs-keyword">bool</span>
+    CustomName     <span class="hljs-keyword">string</span>
+    ComposeConfig <span class="hljs-keyword">bool</span>
+}
+</code></pre>
 
                                 
                                 </section>
@@ -356,12 +385,12 @@
 
             
                 
-                <a href="packages.html" class="navigation navigation-prev " aria-label="Previous page: Packages">
+                <a href="installing.html" class="navigation navigation-prev " aria-label="Previous page: Installing">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="deploy.html" class="navigation navigation-next " aria-label="Next page: Deploy">
+                <a href="quickstart.html" class="navigation navigation-next " aria-label="Next page: Quick Start">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -372,7 +401,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Up/Down","level":"1.2.6","depth":2,"next":{"title":"Deploy","level":"1.2.7","depth":2,"path":"api/deploy.md","ref":"api/deploy.md","articles":[]},"previous":{"title":"Packages","level":"1.2.5","depth":2,"path":"api/packages.md","ref":"api/packages.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/updown.md","mtime":"2017-01-04T10:28:49.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-09T11:44:26.377Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Packages","level":"1.1.3","depth":2,"next":{"title":"Quick Start","level":"1.1.4","depth":2,"path":"introduction/quickstart.md","ref":"introduction/quickstart.md","articles":[]},"previous":{"title":"Installing","level":"1.1.2","depth":2,"path":"introduction/installing.md","ref":"introduction/installing.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"introduction/package.md","mtime":"2017-01-09T11:09:16.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-09T11:44:26.377Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
